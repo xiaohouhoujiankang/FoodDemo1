@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.food_demo.module.mapper.CategoryMapper">
+
+    <insert id="insert"
+            useGeneratedKeys="true"
+            keyProperty="id"
+            parameterType="org.example.food_demo.module.entity.Category">
+        insert into category(
+                        <if test=" category.name  != null and category.name != ''"> `name` ,</if>
+                        <if test=" category.image  != null and category.image != ''"> `image` ,</if>
+                        <if test=" category.createTime  != null"> `create_time` ,</if>
+                        <if test=" category.updateTime  != null"> `update_time` ,</if>
+                    is_deleted 
+        )values(
+                        <if test="category.name != null and category.name!= ''">#{category.name},</if>
+                        <if test="category.image != null and category.image!= ''">#{category.image},</if>
+                        <if test="category.createTime != null">#{createTime},</if>
+                        <if test="category.updateTime != null">#{updateTime},</if>
+                    #{isDeleted} 
+        )
+    </insert>
+
+
+    <update id="update" parameterType="org.example.food_demo.module.entity.Category">
+        UPDATE category
+        <set>
+                    `id` = #{category.id},
+                        <if test="category.name != null and category.name != ''">
+                            `name` = #{ category.name },
+                        </if>
+                        <if test="category.image != null and category.image != ''">
+                            `image` = #{ category.image },
+                        </if>
+                        <if test="category.createTime != null">
+                            `create_time` = #{ category.createTime },
+                        </if>
+                        <if test="category.updateTime != null">
+                            `update_time` = #{ category.updateTime },
+                        </if>
+                        <if test="category.isDeleted != null">
+                            `is_deleted` = #{ category.isDeleted },
+                        </if>
+        </set>
+        WHERE `id` = #{category.id}
+    </update>
+
+</mapper>
