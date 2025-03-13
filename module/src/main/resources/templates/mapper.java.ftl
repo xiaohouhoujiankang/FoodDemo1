@@ -5,7 +5,6 @@ package ${package.Mapper};
 import ${package.Entity}.${entity};
 import org.apache.ibatis.annotations.*;
 import java.math.BigInteger;
-import java.util.List;
 @Mapper
 public interface ${className} {
 

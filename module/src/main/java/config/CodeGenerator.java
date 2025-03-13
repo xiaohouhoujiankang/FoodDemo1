@@ -1,12 +1,8 @@
 package config;
-
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
-import com.baomidou.mybatisplus.generator.config.TemplateType;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
-
-
 import java.sql.Types;
 import java.util.*;
 
@@ -18,29 +14,6 @@ public class CodeGenerator {
                             .enableSwagger() // 开启 swagger 模式
                             .outputDir("M:\\b5197\\FoodDemo1\\module\\src\\main\\java");// 指定输出目录
                     Map<String, Object> dataModel = new HashMap<>();
-
-                    // 生成 editFood 方法签名
-                    dataModel.put("methodName", "editFood");
-                    dataModel.put("returnType", "BigInteger");
-                    List<Map<String, String>> editFoodParams = Arrays.asList(
-                            Map.of("type", "BigInteger", "name", "id"),
-                            Map.of("type", "String", "name", "name"),
-                            Map.of("type", "String", "name", "foodPhotos"),
-                            Map.of("type", "String", "name", "foodIntroduce"),
-                            Map.of("type", "BigInteger", "name", "categoryId")
-                    );
-                    dataModel.put("parameters", editFoodParams);
-                    dataModel.clear();
-                    dataModel.put("methodName", "editCategory");
-                    dataModel.put("returnType", "BigInteger");
-                    List<Map<String, String>> editCategoryParams = Arrays.asList(
-                            Map.of("type", "BigInteger", "name", "id"),
-                            Map.of("type", "String", "name", "name"),
-                            Map.of("type", "String", "name", "image")
-                    );
-                    dataModel.put("parameters", editCategoryParams);
-
-
                 })
                 .dataSourceConfig(builder ->
                         builder.typeConvertHandler((globalConfig, typeRegistry, metaInfo) -> {
@@ -73,10 +46,8 @@ public class CodeGenerator {
 
                     builder.entity("/templates/entity.java.ftl")
                             .mapper("/templates/mapper.java.ftl")
+                            .service("/templates/service.java.ftl")
                             .xml("/templates/mapper.xml.ftl");
-
-
-
                 })
                 .execute();
     }
