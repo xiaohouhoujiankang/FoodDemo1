@@ -8,7 +8,7 @@
             parameterType="${package.Entity}.${entity}">
         insert into ${table.name}(
         <#list table.fields as field>
-            <#if field.keyFlag == true>
+            <#if field.keyFlag == false>
             <#else>
                 <#if field.name == "is_deleted">
                     is_deleted <#if field_has_next>,</#if>
@@ -61,18 +61,5 @@
         </set>
         WHERE `${table.name}_id` = <#noparse>#{</#noparse>${table.name}Id<#noparse>}</#noparse>
     </update>
-    <select id="selectByLimit"
-            parameterType="map"
-            resultType="${package.Entity}.${entity}">
-        SELECT * FROM ${table.name}
-        <where>
-            <#if keyWordField??>
-                <if test="keyWord != null and keyWord != ''">
-                    AND ${keyWordField} LIKE CONCAT('%', #{keyWord}, '%')
-                </if>
-            </#if>
-            AND is_deleted = 0
-        </where>
-        LIMIT <#noparse>#{offset}</#noparse>, <#noparse>#{limit}</#noparse>
-    </select>
+
 </mapper>

@@ -44,13 +44,5 @@
         </set>
         WHERE `category_id` = #{categoryId}
     </update>
-    <select id="selectByLimit"
-            parameterType="map"
-            resultType="org.example.food_demo.module.entity.Category">
-        SELECT * FROM category
-        <where>
-            AND is_deleted = 0
-        </where>
-        LIMIT #{offset}, #{limit}
-    </select>
+
 </mapper>
