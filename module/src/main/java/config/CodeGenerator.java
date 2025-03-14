@@ -39,7 +39,11 @@ public class CodeGenerator {
                                 .enableLombok()
                                 .enableTableFieldAnnotation()
                                 .controllerBuilder()
-                                .enableRestStyle()
+                                .disable() // 禁止生成Controller
+
+                                .serviceBuilder()
+                                .disableServiceImpl()
+
                 )
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板
                 .templateConfig(builder -> {
